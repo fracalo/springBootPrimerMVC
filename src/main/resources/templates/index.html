@@ -1,10 +1,39 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>index</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<p th:text="'Hello, ' + ${name} + '!'" />
-</body>
+    <head>
+        <title>todo list</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h2>Todo List</h2>
+
+        <table th:if="${todos.size() > 0}" border="1px solid black">
+            <tr>
+                <th style="padding: 1rem">id</th>
+                <th style="padding: 1rem">title</th>
+                <th style="padding: 1rem">description</th>
+                <th style="padding: 1rem">cretated at</th>
+                <th style="padding: 1rem">updated at</th>
+                <th colspan="2" style="padding: 1rem">actions</th>
+            </tr>
+            <tr th:each="todo: ${todos}">
+                <td style="padding: .3rem 1rem" th:text="${todo.getId()}">
+                <td style="padding: .3rem 1rem; max-width: 200px" th:text="${todo.getTitle()}">
+                <td style="padding: .3rem 1rem; max-width: 200px" th:text="${todo.getDescription()}">
+                <td style="padding: .3rem 1rem; max-width: 200px" th:text="${todo.getCreated_at()}">
+                <td style="padding: .3rem 1rem; max-width: 200px" th:text="${todo.getUpdated_at()}">
+                <td style="padding: .3rem 1rem; max-width: 200px">
+                    <a th:href="${todo.getLink()}"><button type="button" >Edit</button></a>
+                </td>
+                <td style="padding: .3rem 1rem; max-width: 200px">
+                    <a th:href="${todo.getDeleteLink()}"><button type="button" >Delete</button></a>
+                </td>
+            </tr>
+        </table>
+        <div th:if="${todos.size() == 0}"> no todos, you can add one in the create form.</div>
+
+        <p>
+            <a href="/todo"><button type="button" >Create Todo Form</button></a>
+        </p>
+    </body>
 </html>

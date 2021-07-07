@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>edit todo</title>
+        <style>
+            input:read-only {
+                background: #ddd;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 th:if="${todo.id == null}" >Create Todo</h2>
+        <h2 th:unless="${todo.id == null}" >Edit Todo #<span th:text="${todo.id}"></span></h2>
+
+        <form action="#" th:action="${todo.getLink()}" th:object="${todo}" method="post">
+            <p><span style="display: inline-block; min-width: 200px">Id: </span><input readonly type="number" th:field="*{id}" /></p>
+            <p><span style="display: inline-block; min-width: 200px">Title: </span><input type="text" th:field="*{title}" /></p>
+            <p><span style="display: inline-block; min-width: 200px">Description: </span><textarea type="text" th:field="*{description}" /></p>
+
+            <p><span style="display: inline-block; min-width: 200px">Created at: </span><input readonly type="text" th:field="*{created_at}" /></p>
+            <p><span style="display: inline-block; min-width: 200px">Updated at: </span><input readonly type="text" th:field="*{updated_at}" /></p>
+            <p><button type="submit">Submit</button></p>
+        </form>
+        <p><a href="/"><button type="button">Back to list</button></a></p>
+    </body>
+</html>
